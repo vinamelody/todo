@@ -24,6 +24,37 @@ class ViewController: UITableViewController {
         navigationItem.title = "My Todo List"
         
         tableView.register(TaskCell.self, forCellReuseIdentifier: cellId)
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(handleAdd))
+        navigationItem.rightBarButtonItem = addButton
+        
+    }
+    
+    func handleAdd() {
+        
+        let alertController = UIAlertController(title: "Add New Task", message: "", preferredStyle: UIAlertControllerStyle.alert)
+        
+        let saveAction = UIAlertAction(title: "Add", style: UIAlertActionStyle.default, handler:
+            { action -> Void in
+                
+                let taskNameTextField = (alertController.textFields?[0])! as UITextField
+                self.tasks.append(taskNameTextField.text!)
+                self.tableView.reloadData()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default) { (action) -> Void in
+            
+        }
+        
+        alertController.addTextField { (textfield: UITextField) in
+            textfield.placeholder = "Task name"
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
