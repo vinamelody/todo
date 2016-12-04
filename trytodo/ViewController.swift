@@ -14,6 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.blue
+        
+        navigationItem.title = "My Todo List"
     }
 
     override func didReceiveMemoryWarning() {
